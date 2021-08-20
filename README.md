@@ -23,6 +23,7 @@
 - cpanm install __JSON__
 - cpanm install __Net::SSLeay__
 - cpanm install __IO::Socket::SSL__
+- cpanm install __Data::Dump__
 
 ## Notes on Current Implementation
 
