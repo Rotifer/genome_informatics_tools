@@ -11,7 +11,7 @@ sub get_json_for_endpoint {
     my $response = $http->get($url, {
                    headers => { 'Content-type' => 'application/json' }
          });
- #die "Failed!\n" unless $response->{success};
+    die "URL: $url call failed!\n" unless $response->{success};
     if(length $response->{content}) {
         return $response->{content};
     }
