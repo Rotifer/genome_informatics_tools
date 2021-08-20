@@ -19,3 +19,8 @@ foreach my $gene_xref (@{$gene_xrefs_ds}) {
     dump($gene_xref);
 }
 
+my $json_file_name = 'gene_xref_json_example_' . $ensembl_id . '.json';
+open(my $fh, '>', $json_file_name);
+print $fh  $gene_xrefs;
+close($fh);
+
