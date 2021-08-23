@@ -24,3 +24,10 @@ open(my $fh, '>', $json_file_name);
 print $fh  $gene_xrefs;
 close($fh);
 
+my $ensembl_id = 'ENSMUSG00000017167';
+print EnsemblRestQueries::get_archive_ensembl_id_version($ensembl_id), "\n";
+
+my @ensembl_id_list = qw(ENSG00000157764 ENSG00000248378);
+print EnsemblRestQueries::get_archive_ensembl_id_version_for_list(@ensembl_id_list);
+
+
