@@ -7,7 +7,7 @@ use Cwd qw( abs_path );
 use File::Basename qw( dirname );
 use lib dirname(abs_path($0));
 use EnsemblRestQueries;
-
+=head
 my $ensembl_id = 'ENSG00000157764';
 my $gene_xrefs = EnsemblRestQueries::get_xrefs_for_ensembl_id($ensembl_id);
 my $gene_xrefs_ds = decode_json($gene_xrefs); 
@@ -28,6 +28,13 @@ my $ensembl_id = 'ENSMUSG00000017167';
 print EnsemblRestQueries::get_archive_ensembl_id_version($ensembl_id), "\n";
 
 my @ensembl_id_list = qw(ENSG00000157764 ENSG00000248378);
-print EnsemblRestQueries::get_archive_ensembl_id_version_for_list(@ensembl_id_list);
+print EnsemblRestQueries::post_archive_ensembl_id_version(@ensembl_id_list);
 
+my($species, $symbol) = ('homo_sapiens', 'BRCA2');
+print EnsemblRestQueries::get_xref_for_species_symbol($species, $symbol);
+=cut
+
+# /xrefs/name/human/BRCA2?content-type=application/json
+my($name, $symbol) = qw(human BRCA2);
+print EnsemblRestQueries::get_xrefs_species_name($name, $symbol);
 

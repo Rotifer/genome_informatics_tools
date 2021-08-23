@@ -1,4 +1,6 @@
 package EnsemblRestQueries;
+use strict;
+use warnings;
 use HTTP::Tiny;
 
 # A module to execute Ensemble REST API calls for specific end-points
@@ -24,7 +26,7 @@ sub get_json_for_endpoint {
 
 # Return a JSON string for a given POST end-point.
 # All POST end-point calls are routed through this subroutine
-sub get_json_for_post_endpoint {
+sub post_json_for_endpoint {
     my $endpoint_url = shift;
     my $content = shift;
     my $url = $base_url . $endpoint_url;
@@ -50,13 +52,8 @@ sub wrap_post_request_content_list {
     return $post_request_content_list;
 }
 
-#GET xrefs/id/:id	Perform lookups of Ensembl Identifiers and retrieve their external references in other databases
-sub get_xrefs_for_ensembl_id {
-    my $ensembl_id = shift;
-    my $end_point_url = "xrefs/id/$ensembl_id?";
-    return get_json_for_endpoint($end_point_url);
-}
 
+########## Archive #########
 # GET archive/id/:id Uses the given identifier to return its latest version
 sub get_archive_ensembl_id_version {
     my $ensembl_id = shift;
@@ -65,10 +62,40 @@ sub get_archive_ensembl_id_version {
 }
 
 # POST archive/id Retrieve the latest version for a set of identifiers
-sub  get_archive_ensembl_id_version_for_list {
+sub  post_archive_ensembl_id_version {
     my @ensembl_ids = @_;  
     my $content = wrap_post_request_content_list(@ensembl_ids);
     my $endpoint_url = '/archive/id';
-    return  get_json_for_post_endpoint($endpoint_url, $content);
-}	
+    return  post_json_for_endpoint($endpoint_url, $content);
+
+}
+
+
+########## xref #########
+
+#GET xrefs/id/:id Perform lookups of Ensembl Identifiers and retrieve their external references in other databases
+sub get_xrefs_for_ensembl_id {
+    my $ensembl_id = shift;
+    my $endpoint_url = "xrefs/id/$ensembl_id?";
+    return get_json_for_endpoint($endpoint_url);
+}
+
+# GET xrefs/symbol/:species/:symbol https://rest.ensembl.org/documentation/info/xref_external
+# Given a species name (e.g. homo_sapiens) and a symbol (e.g. BRCA2), return a JSON string of xrefs
+sub get_xref_for_species_symbol {
+    my $species = shift;
+    my $symbol = shift;
+    my $endpoint_url = "/xrefs/symbol/$species/$symbol?";
+    return get_json_for_endpoint($endpoint_url);
+}
+
+# GET xrefs/name/:species/:name Performs a lookup based upon the primary accession or display label of an external reference and returning the information we hold about the entry
+# https://rest.ensembl.org/documentation/info/xref_name
+sub get_xrefs_species_name {
+    my $name = shift;
+    my $symbol = shift;
+    my $endpoint_url = "/xrefs/name/$name/$symbol?";
+    return get_json_for_endpoint($endpoint_url);
+
+}
 1;
