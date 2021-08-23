@@ -1,21 +1,29 @@
-# Ensembl REST API Notes
+# My genomic informatics tools
+
+## Introduction
+
+Set of Perl scripts and modules for querying public genomic data sources. These include:
+
+- Ensembl REST API
+- NCBI Entrez Programming Utilities
+- BioPerl
 
 ## Purpose
 
-- Build one or more Perl modules for wrapping calls to the Ensembl REST API
+- Build one or more Perl modules for wrapping calls to external resources
 - The modules here are deliberately non-OO in nature
 - The idea is to use the functionality as a collection of shell tools for querying entities such as genes, SNPS, transcripts etc using names or Ensembl IDs
-- For example, to get a list of SNPs for a gene specified by either name or ID
-- Loosely modelled on the approach employed by NCBI's [Edirect tool](https://www.ncbi.nlm.nih.gov/books/NBK179288/)
-- Aims to use the system Perl (using version 5.32 on Mac)
-- Minimise the use of CPAN packages to make installs as easy as possible with minimal requirements
-- This is a prototype and I would ideally like to move it to a compiled Go utility
 
 
 ## Links
 
-[Ensemble REST API endpoints home page](https://rest.ensembl.org)
+- [Ensemble REST API endpoints home page](https://rest.ensembl.org)
+- [Entrez Direct: E-utilities on the Unix Command Line](https://www.ncbi.nlm.nih.gov/books/NBK179288/)
 
+### Eutils
+
+- [Notes on using NCBI eutils](https://gist.github.com/tomsing1/074e10905a89072144227f4670377d31)
+- [The 9 E-utilities and Associated Parameters](https://dataguide.nlm.nih.gov/eutilities/utilities.html)
 
 ## Dependencies
 
@@ -26,11 +34,13 @@
 - cpanm install __Net::SSLeay__
 - cpanm install __IO::Socket::SSL__
 - cpanm install __Data::Dump__
+- cpanm install __XML::Simple__
 
 ### External tools
 
 - brew install __jq__ 
 - brew install __gnuplot__
+- source ./install-edirect.sh # The NCBI eutils tools
 
 ## Notes on Current Implementation
 
@@ -41,6 +51,8 @@
 - Will try to use external tools as much as possible to minimise the code
 - External tools add dependencies but all the chosen tools should be easy to install on linux/unix/mac OS X
 - Aim is to use __jq__ for most of the JSON munging
+
+
 
 ## Planned Improvements
 
