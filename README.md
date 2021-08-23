@@ -36,7 +36,7 @@
 
 - I am re-acquainting myself with Perl so this is just a rough version
 - Currently all code -packages and scripts- are in the same directory - This is not a good practice
-- Since Perl 5.26, the current directory (.) is not included in _@INC_. A good workarounf is discussed in Stackoverflow [here](https://stackoverflow.com/questions/46549671/doesnt-perl-include-current-directory-in-inc-by-default)
+- Since Perl 5.26, the current directory (.) is not included in _@INC_. A good workaround is discussed in Stackoverflow [here](https://stackoverflow.com/questions/46549671/doesnt-perl-include-current-directory-in-inc-by-default)
 - Added a package called __ExtUtils.pm__ for running external utilitis and tools
 - Will try to use external tools as much as possible to minimise the code
 - External tools add dependencies but all the chosen tools should be easy to install on linux/unix/mac OS X
